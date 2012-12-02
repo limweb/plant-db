@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" 
+		   width="100%" height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			import th.co.servit.vo.SearchResult;
+			
+			import mx.binding.utils.BindingUtils;
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.DragEvent;
+			import mx.managers.DragManager;
+			
+			[Bindable]
+			private var AcShrub:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var AcVein:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var AcGroundC:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var AcTree:ArrayCollection = new ArrayCollection();
+			
+			
+			[Bindable]
+			private var _AcShrub:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var _AcVein:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var _AcGroundC:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var _AcTree:ArrayCollection = new ArrayCollection();
+			
+			
+			
+			
+			//			protected function button1_clickHandler(event:MouseEvent):void
+			//			{
+			//				
+			//				FlexGlobals.topLevelApplication.gotoVs(3);
+			//			}
+			
+			public function addData(list:ArrayCollection):void {
+				var m:SearchResult;
+				for(var i:int =0; i< list.length; i++ ){
+					if(list[i].planttype == 'ไม้ต้น'){
+						  m = new SearchResult();
+						  m.commonname = list[i].commonname;
+						  m.bloomingseason = list[i].bloomingseason;
+						  m.flowercolor = list[i].flowercolor;
+						  m.planttype = list[i].planttype;
+						  m.pictureone = list[i].pictureone;
+						  m.treeshape = list[i].treeshape;
+						AcTree.addItem(m);
+					} else if(list[i].planttype == 'ไม่พุ่ม'){
+						  m = new SearchResult();
+						  m.commonname = list[i].commonname;
+						  m.bloomingseason = list[i].bloomingseason;
+						  m.flowercolor = list[i].flowercolor;
+						  m.planttype = list[i].planttype;
+						  m.pictureone = list[i].pictureone;
+						  m.treeshape = list[i].treeshape;
+						AcShrub.addItem(m);
+						
+					} else if(list[i].planttype == 'ไม้คลุมดิน'){
+						  m = new SearchResult();
+						  m.commonname = list[i].commonname;
+						  m.bloomingseason = list[i].bloomingseason;
+						  m.flowercolor = list[i].flowercolor;
+						  m.planttype = list[i].planttype;
+						  m.pictureone = list[i].pictureone;
+						  m.treeshape = list[i].treeshape;
+						AcGroundC.addItem(m);
+						
+					} else if(list[i].planttype == 'ไม้เลื่อย'){
+						  m = new SearchResult();
+						  m.commonname = list[i].commonname;
+						  m.bloomingseason = list[i].bloomingseason;
+						  m.flowercolor = list[i].flowercolor;
+						  m.planttype = list[i].planttype;
+						  m.pictureone = list[i].pictureone;
+						  m.treeshape = list[i].treeshape;
+						AcVein.addItem(m);
+						
+
+					} else {
+						
+					}
+				}
+			}
+			
+			protected function vgroup1_dragEnterHandler(event:DragEvent):void
+			{
+				if (event.dragSource.hasFormat("itemsByIndex"))
+				{
+					DragManager.acceptDragDrop(event.currentTarget as VGroup);
+				}
+				
+			}
+			
+			protected function vgroup1_dragDropHandler(event:DragEvent):void
+			{
+				var m:SearchResult = event.dragSource.dataForFormat("itemsByIndex")[0] as SearchResult;
+				var i:int = 0;
+				if(m.planttype == 'ไม้ต้น' && !m.isSelected){
+					m.isSelected = true;
+					_AcTree.addItem(m);	
+					
+					
+					for(i=0;i<AcTree.length;i++) {
+						if(AcTree[i].commonname == m.commonname ){
+							AcTree.removeItemAt(i);
+							AcTree.refresh();
+							treelist.invalidateDisplayList();
+							treelist.validateDisplayList();
+							treelist.validateNow();
+							break;
+						}
+					}
+					
+				} else if(m.planttype == 'ไม่พุ่ม' && !m.isSelected){	
+					m.isSelected = true;
+					_AcShrub.addItem(m);	
+					for(i=0;i<AcShrub.length;i++) {
+						if(AcShrub[i].commonname == m.commonname ){
+							AcShrub.removeItemAt(i);
+							AcShrub.refresh();
+							break;
+						}
+					}
+				} else if(m.planttype == 'ไม้คลุมดิน' && !m.isSelected){	
+					m.isSelected = true;
+					_AcGroundC.addItem(m);	
+					for(i=0;i<AcGroundC.length;i++) {
+						if(AcGroundC[i].commonname == m.commonname ){
+							AcGroundC.removeItemAt(i);
+							AcGroundC.refresh();
+							break;
+						}
+					}
+				} else if(m.planttype == 'ไม้เลื่อย' && !m.isSelected){	
+					m.isSelected = true;
+					_AcVein.addItem(m);	
+					for(i=0;i<AcVein.length;i++) {
+						if(AcVein[i].commonname == m.commonname ){
+							AcVein.removeItemAt(i);
+							AcVein.refresh();
+							break;
+						}
+					}
+				} else {
+					
+				}
+				
+				invalidateDisplayList();
+				
+			}
+			
+			protected function deleteall(event:MouseEvent):void
+			{
+				AcTree.removeAll();
+				AcVein.removeAll();
+				AcGroundC.removeAll();
+				AcShrub.removeAll();
+				_AcTree.removeAll();
+				_AcVein.removeAll();
+				_AcGroundC.removeAll();
+				_AcShrub.removeAll();
+				FlexGlobals.topLevelApplication.gotoVs(1);
+				
+			}
+			
+			protected function back2Add(event:MouseEvent):void
+			{
+				AcTree.removeAll();
+				AcVein.removeAll();
+				AcShrub.removeAll();
+				AcGroundC.removeAll();
+				FlexGlobals.topLevelApplication.gotoVs(1);
+			}
+			
+			protected function vgroup2_dragDropHandler(event:DragEvent):void
+			{
+				var m:SearchResult = event.dragSource.dataForFormat("itemsByIndex")[0] as SearchResult;
+				var i:int = 0;
+				if(m.planttype == 'ไม้ต้น' && m.isSelected){
+					m.isSelected = false;
+					AcTree.addItem(m);	
+					
+					
+					for(i=0;i<_AcTree.length;i++) {
+						if(_AcTree[i].commonname == m.commonname ){
+							_AcTree.removeItemAt(i);
+							_AcTree.refresh();
+							treelist.invalidateDisplayList();
+							treelist.validateDisplayList();
+							treelist.validateNow();
+							break;
+						}
+					}
+					
+				} else if(m.planttype == 'ไม่พุ่ม' && m.isSelected){	
+					m.isSelected = false;
+					AcShrub.addItem(m);	
+					for(i=0;i<_AcShrub.length;i++) {
+						if(_AcShrub[i].commonname == m.commonname ){
+							_AcShrub.removeItemAt(i);
+							_AcShrub.refresh();
+							break;
+						}
+					}
+				} else if(m.planttype == 'ไม้คลุมดิน' && !m.isSelected){	
+					m.isSelected = false;
+					AcGroundC.addItem(m);	
+					for(i=0;i<_AcGroundC.length;i++) {
+						if(_AcGroundC[i].commonname == m.commonname ){
+							_AcGroundC.removeItemAt(i);
+							_AcGroundC.refresh();
+							break;
+						}
+					}
+				} else if(m.planttype == 'ไม้เลื่อย' && !m.isSelected){	
+					m.isSelected = false;
+					AcVein.addItem(m);	
+					for(i=0;i<_AcVein.length;i++) {
+						if(_AcVein[i].commonname == m.commonname ){
+							_AcVein.removeItemAt(i);
+							_AcVein.refresh();
+							break;
+						}
+					}
+				} else {
+					
+				}
+				
+				invalidateDisplayList();
+				
+			}
+			
+			protected function vgroup2_dragEnterHandler(event:DragEvent):void
+			{
+				if (event.dragSource.hasFormat("itemsByIndex"))
+				{
+					DragManager.acceptDragDrop(event.currentTarget as VGroup);
+				}
+				
+			}
+			
+			protected function Next(event:MouseEvent):void
+			{
+				makesearchin();
+				FlexGlobals.topLevelApplication.gotoVs(3);
+				
+			}
+			
+			
+			private function makesearchin():void  {
+				var i:int = 0;
+				var searchtext:String = "";
+				
+				if((_AcGroundC.length + _AcShrub.length + _AcTree.length + _AcVein.length ) > 0 ){
+							
+					searchtext = "(";
+					if(_AcGroundC.length > 0 ){
+						for(i=0;i<_AcGroundC.length;i++){
+							searchtext += "'" + _AcGroundC[i].commonname + "',";	
+						}
+					}
+					if(_AcShrub.length > 0 ){
+						for(i=0;i<_AcShrub.length;i++){
+							searchtext += "'" + _AcShrub[i].commonname + "',";
+						}
+					}
+					if(_AcTree.length > 0 ){
+						for(i=0;i<_AcTree.length;i++){
+							searchtext += "'" + _AcTree[i].commonname + "',";
+						}
+					}	
+					if(_AcVein.length > 0 ){
+						for(i=0;i<_AcVein.length;i++){
+							searchtext += "'" + _AcVein[i].commonname + "',";
+						}
+					}
+					searchtext = searchtext.substr(0,searchtext.length-1);
+					searchtext = searchtext + ")";
+				} else {
+					searchtext = null;
+				}
+				
+//				Alert.show(searchtext,'search');
+				FlexGlobals.topLevelApplication.searchtext = searchtext;
+					
+			}
+			
+			
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:VGroup width="100%" height="100%" >
+		<mx:HBox width="100%" height="32" backgroundColor="#FFFFF0" horizontalAlign="right"
+				 paddingRight="20" verticalAlign="middle" paddingLeft="20">
+			<mx:Text text="Result" />
+			<s:Spacer width="100%" />
+			<s:Button label="Back to Add" click="back2Add(event)"/>
+			<s:Button label="Next" click="Next(event)"/>
+			<s:Button label="Back" visible="false" />
+		</mx:HBox>
+		<mx:HBox width="100%" height="100%">
+			<mx:VBox width="40%" height="100%" paddingLeft="20">
+				<s:Group  x="0" y="0" width="100%" height="30" >
+					<mx:Text x="0" y="0" fontFamily="Verdana" fontSize="22"
+							 fontWeight="bold" text="MY LIST" 
+							 />
+				</s:Group>
+				<s:Scroller width="100%" height="100%" skinClass="components.Whatever">
+					<s:VGroup width="100%"  gap="0" 
+							  dragDrop="vgroup2_dragDropHandler(event)"
+							  dragEnter="vgroup2_dragEnterHandler(event)"
+							  >
+						<s:Group width="100%" height="30" 
+								 visible="{AcTree.length>0}"
+								 includeInLayout="{AcTree.length>0}">
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="TREE" 
+									 includeInLayout="{AcTree.length>0}"
+									 visible="{AcTree.length>0}"/>
+						</s:Group>
+						<s:List width="100%" autoLayout="true"
+								id="treelist"
+								dataProvider="{AcTree}"
+								labelField="name" 
+								itemRenderer="itemrender.itemRenderer1"
+								dragEnabled="true"
+								dragMoveEnabled="true"
+								>
+							<s:layout>
+								<s:VerticalLayout id="vlo" requestedRowCount="{AcTree.length}" />
+							</s:layout>
+						</s:List>
+						<s:Group width="100%" height="30" 
+								 visible="{AcShrub.length>0}"
+								 includeInLayout="{AcShrub.length>0}">
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="SHRUB" 
+									 includeInLayout="{AcShrub.length>0}"
+									 visible="{AcShrub.length>0}"/>
+						</s:Group>
+						<s:List width="100%"
+								dataProvider="{AcShrub}"
+								labelField="name" 
+								dragEnabled="true"
+								dragMoveEnabled="true"
+								itemRenderer="itemrender.itemRenderer1"
+								>
+							<s:layout>
+								<s:VerticalLayout id="vloSHRUB" requestedRowCount="{AcShrub.length}" />
+							</s:layout>
+						</s:List>
+						<s:Group width="100%" height="30" 
+								 visible="{AcVein.length>0}"
+								 includeInLayout="{AcVein.length>0}">
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="VEIN" 
+									 includeInLayout="{AcVein.length>0}"
+									 visible="{AcVein.length>0}"/>
+						</s:Group>
+						<s:List width="100%"
+								dataProvider="{AcVein}"
+								labelField="name" 
+								dragMoveEnabled="true"
+								itemRenderer="itemrender.itemRenderer1"
+								dragEnabled="true"
+								>
+							<s:layout>
+								<s:VerticalLayout id="vloVein" requestedRowCount="{AcVein.length}" />
+							</s:layout>
+						</s:List>
+						<s:Group width="100%" height="30" 
+								 visible="{AcGroundC.length>0}"
+								 includeInLayout="{AcGroundC.length>0}">
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="Ground Cover" 
+									 includeInLayout="{AcGroundC.length>0}"
+									 visible="{AcGroundC.length>0}"/>
+						</s:Group>
+						<s:List width="100%"
+								dataProvider="{AcGroundC}"
+								labelField="name" 
+								dragMoveEnabled="true"
+								dragEnabled="true"
+								itemRenderer="itemrender.itemRenderer1"
+								>
+							<s:layout>
+								<s:VerticalLayout id="vloGround" requestedRowCount="{AcGroundC.length}" />
+							</s:layout>
+						</s:List>
+						
+					</s:VGroup>
+				</s:Scroller>
+			</mx:VBox>
+			<mx:VBox width="60%" height="100%">
+				<s:Scroller x="563" y="5" width="100%" height="100%" skinClass="components.Whatever">
+					<s:VGroup width="100%" height="100%" 
+							  dragEnter="vgroup1_dragEnterHandler(event)"
+							  dragDrop="vgroup1_dragDropHandler(event)"
+							  >
+						<s:Group width="100%" height="30" >
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="TREE" 
+									 />
+						</s:Group>
+						<s:List width="100%" labelField="name"  
+								includeInLayout="{_AcTree.length>0}"
+								visible="{_AcTree.length>0}"
+								itemRenderer="itemrender.itemRender2"
+								dragEnabled="true"								
+								dataProvider="{_AcTree}">
+							<s:layout>
+								<s:TileLayout />
+							</s:layout>
+						</s:List>
+						<s:Group width="100%" height="30"  >
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="SHRUB" 
+									 />
+						</s:Group>
+						<s:List width="100%" labelField="name"  
+								includeInLayout="{_AcShrub.length>0}"
+								visible="{_AcShrub.length>0}"
+								dragEnabled="true"
+								itemRenderer="itemrender.itemRender2"
+								dataProvider="{_AcShrub}">
+							<s:layout>
+								<s:TileLayout />
+							</s:layout>
+						</s:List>
+						<s:Group width="100%" height="30" >
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="VEIN" 
+									 />
+						</s:Group>
+						<s:List width="100%" labelField="name"  
+								includeInLayout="{_AcVein.length>0}"
+								visible="{_AcVein.length>0}"
+								dragEnabled="true"
+								itemRenderer="itemrender.itemRender2"
+								dataProvider="{_AcVein}">
+							<s:layout>
+								<s:TileLayout />
+							</s:layout>
+						</s:List>
+						<s:Group width="100%" height="30" >
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="Ground Cover" 
+									 />
+						</s:Group>
+						<s:List width="100%" labelField="name" 
+								includeInLayout="{_AcGroundC.length>0}"
+								visible="{_AcGroundC.length>0}"
+								itemRenderer="itemrender.itemRender2"
+								dragEnabled="true"
+								dataProvider="{_AcGroundC}">
+							<s:layout>
+								<s:TileLayout />
+							</s:layout>
+						</s:List>
+					</s:VGroup>
+				</s:Scroller> 
+			</mx:VBox>
+		</mx:HBox>
+		
+	</s:VGroup> 
+	<s:Button x="462" y="6" label="Reset" click="deleteall(event)"/>
+	
+</mx:Canvas>

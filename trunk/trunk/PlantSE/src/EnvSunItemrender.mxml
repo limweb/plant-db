@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	
+	<fx:Script>
+		<![CDATA[
+			import th.co.servit.vo.PlantDBVO;
+			override public function set data(value:Object):void
+			{
+				super.data = value;
+				if(value != null){
+					var vo:PlantDBVO = value as PlantDBVO;
+					if(vo.pic1.length > 4 ){
+						img1.source = vo.pic1;
+					} else {
+						img1.source = '.\\assets\\big-up.png';;
+					}
+					txt1.text = vo.commonname;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<s:VGroup width="100" height="100" 
+			  paddingBottom="5"  paddingLeft="5" paddingRight="5" paddingTop="5" >
+		<s:Image width="100%" height="100%" id="img1" horizontalAlign="center"/>
+		<s:Label id="txt1" text="{data.commonname}" width="100%" textAlign="center" />
+	</s:VGroup>
+	
+</s:ItemRenderer>

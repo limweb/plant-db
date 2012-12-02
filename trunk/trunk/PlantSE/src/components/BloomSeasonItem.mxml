@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" 
+		  width="100%" height="150" gap="0"
+		  >
+	<fx:Script>
+		<![CDATA[
+			import flash.sampler.NewObjectSample;
+			
+			import mx.containers.Box;
+			import mx.containers.VBox;
+			import mx.events.FlexEvent;
+			import mx.utils.ObjectUtil;
+			
+			import th.co.servit.vo.PlantDBVO;
+			[Bindable] public var plvo:PlantDBVO = new PlantDBVO();
+			
+			public function init(monthArray:Array,ColorArray:Array):void {
+				var i:int =0;
+				var c:ColorBox;
+				var nc:NullColor;
+
+				if(plvo.pic1.length>4){
+					img1.source = plvo.pic1;
+				}
+				
+				
+				if( monthArray[0] == "Y"){
+					
+					if(ColorArray[0] != "N/A"){
+						for(i=0;i<ColorArray.length;i++) {
+							c = new ColorBox();
+							vg1.addElement(c);
+							c.cc = ColorArray[i];
+						}
+					} else {
+//						nc = new NullColor();
+//						vg1.addElement(nc);
+					}
+					
+				}
+
+				if( monthArray[1] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg2.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[2] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg3.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[3] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg4.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[4] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg5.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[5] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg6.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[6] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg7.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[7] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg8.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[8] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg9.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[9] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg10.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[10] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg11.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				if( monthArray[11] == "Y"){
+					if(ColorArray[0] != "N/A"){
+					for(i=0;i<ColorArray.length;i++) {
+						c = new ColorBox();
+						vg12.addElement(c);
+						c.cc = ColorArray[i];
+					}
+					} else {
+						//						nc = new NullColor();
+						//						vg1.addElement(nc);
+					}
+				}
+
+				validateNow();
+				
+			}
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+
+	</fx:Declarations>
+		<s:Group width="200" height="100%">
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+				<!--<s:fill>
+				<s:SolidColor color="#ff0000" />
+				</s:fill>-->
+			</s:Rect>
+			<s:Group width="100%" height="100%" id="nullColorID" visible="false" includeInLayout="false">
+				<s:Rect width="100%" height="100%" id="rect1" >
+					<s:stroke>
+						<s:SolidColorStroke caps="none" color="#5C5C5C" joints="miter" miterLimit="4"
+											weight="1"/>
+					</s:stroke>
+					<s:fill>
+						<s:SolidColor color="#FFFFFF"/>
+					</s:fill>
+				</s:Rect>
+				<s:Line x="0.5" y="0.5" xTo="{rect1.width-1}" yTo="{rect1.height-1}">
+					<s:stroke>
+						<s:SolidColorStroke caps="none" color="#5C5C5C" joints="miter" miterLimit="4"
+											weight="1"/>
+					</s:stroke>
+				</s:Line>
+				<s:Line x="0.5" y="0.5" yFrom="{rect1.height}" xTo="{rect1.width-1}" yTo="0.5">
+					<s:stroke>
+						<s:SolidColorStroke caps="none" color="#5C5C5C" joints="miter" miterLimit="4"
+											weight="1"/>
+					</s:stroke>
+				</s:Line>
+			</s:Group>
+			<s:VGroup width="100%" height="100%" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" 
+					  horizontalAlign="center" id="vg" >
+				<mx:Image width="100%" height="100%" horizontalAlign="center" id="img1"
+						  source="assets/aggregate-fruit-down.png" />
+				<mx:Text text="Name: {plvo.commonname}" />
+			</s:VGroup>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg1" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg2" >
+
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg3" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg4" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg5" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg6" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg7" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg8" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+
+	<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg9" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg10" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg11" >
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+		
+		<s:Group width="100%" height="100%">
+			<s:VGroup width="100%" height="100%" verticalAlign="middle" 
+					  gap="0"
+					  horizontalAlign="center" id="vg12" >
+				
+			</s:VGroup>
+			<s:Rect width="100%" height="100%">
+				<s:stroke>
+					<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+				</s:stroke>
+			</s:Rect>
+		</s:Group>
+</s:HGroup>

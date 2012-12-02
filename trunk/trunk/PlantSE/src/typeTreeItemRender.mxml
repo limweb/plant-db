@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:fc="http://ns.adobe.com/flashcatalyst/2009" 
+				toolTip="{data.tooltip}"
+				autoDrawBackground="true" xmlns:utils="org.apache.utils.*">
+	<fx:Script>
+		<![CDATA[
+			import assets.graphics.*;
+			
+//			import org.apache.utils.FXGImage;
+			
+			override public function set data(value:Object):void
+			{
+				// TODO Auto Generated method stub
+				super.data = value;
+				if(value.img == 1){
+					var a:Graphic1 = new Graphic1();
+					bitMap1.source = a;
+				} else if(value.img == 2){
+					var b:Graphic2 = new Graphic2();
+					bitMap1.source = b;
+					
+				} else if(value.img == 3){
+					var c:Graphic3 = new Graphic3();
+					bitMap1.source = c;
+					
+				} else if(value.img == 4){
+					var d:Graphic4 = new Graphic4();
+					bitMap1.source = d;
+					
+				} else if(value.img == 5){
+					var e:Graphic5 = new Graphic5();
+				bitMap1.source = e;
+				}
+
+			}
+			
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="hovered"/>
+		<s:State name="selected"/>
+	</s:states>
+	<s:Group width="56" height="56" id="gg">
+		
+	</s:Group>
+<!--	<utils:FXGImage width="56" height="56" id="fxgImg"  />-->
+	<s:BitmapImage width="56" height="56" id="bitMap1" />	
+	<s:Rect width="56" height="56"
+			includeIn="hovered" alpha="0.5">
+		<s:fill>
+			<s:SolidColor color="0xCCCCCC"/>
+		</s:fill>
+	</s:Rect>
+	
+	<s:Path data="M74,312 L156,534L300,436C300,436 576,250 700,258L718,120C718,120 591.7,170.7 396.4,294L201.95,421.9L139.7,248.45L74,312Z "
+			winding="nonZero"
+			includeIn="selected"
+			x="-6" y="2" width="55" height="35">
+		<s:fill>
+			<s:LinearGradient x="74" y="120" scaleX="644">
+				<s:GradientEntry color="#A5E939" ratio="0.013513513513513514"/>
+				<s:GradientEntry color="#E2FBCD" ratio="0.9864864864864865"/>
+			</s:LinearGradient>
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="#04DAAF" alpha="1" weight="1"/>
+		</s:stroke>
+	</s:Path>
+</s:ItemRenderer>

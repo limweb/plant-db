@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="100%" height="100%"
+		 >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+		<s:Rect width="100%" height="100%" id="rect2" >
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#5C5C5C" joints="miter" miterLimit="4"
+									weight="1"/>
+			</s:stroke>
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+		</s:Rect>
+		<s:Line x="0.5" y="0.5" xTo="{rect2.width-1}" yTo="{rect2.height-1}">
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#5C5C5C" joints="miter" miterLimit="4"
+									weight="1"/>
+			</s:stroke>
+		</s:Line>
+		<s:Line x="0.5" y="0.5" yFrom="{rect2.height}" xTo="{rect2.width-1}" yTo="0.5">
+			<s:stroke>
+				<s:SolidColorStroke caps="none" color="#5C5C5C" joints="miter" miterLimit="4"
+									weight="1"/>
+			</s:stroke>
+		</s:Line>
+</s:Group>

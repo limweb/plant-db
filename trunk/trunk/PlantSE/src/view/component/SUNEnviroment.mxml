@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.core.FlexGlobals;
+			
+			import th.co.servit.vo.PlantDBVO;
+			[Bindable] private var AcSunHight:ArrayCollection = new ArrayCollection();
+			[Bindable] private var AcSunMid:ArrayCollection = new ArrayCollection();
+			[Bindable] private var AcsunLow:ArrayCollection = new ArrayCollection();
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				
+				FlexGlobals.topLevelApplication.gotoVs(6);
+			}
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				FlexGlobals.topLevelApplication.gotoVs(7);
+				
+			}
+			
+			public function setData(list:ArrayCollection):void  {
+				AcSunHight.removeAll();
+				AcsunLow.removeAll();
+				AcSunMid.removeAll();
+				for each (var vo:PlantDBVO in list) 
+				{
+					if(vo.sunlightrequirement == "มาก"){
+						AcSunHight.addItem(vo);
+					}else if(vo.sunlightrequirement == "ปานกลาง"){
+						AcSunMid.addItem(vo);
+					}else if(vo.sunlightrequirement == "น้อย"){
+						AcsunLow.addItem(vo);
+					}else {	}
+				}
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:VGroup width="100%" height="100%" >
+		<mx:HBox width="100%" height="32" backgroundColor="#FFFFF0" horizontalAlign="right"
+				 paddingRight="20" verticalAlign="middle" paddingLeft="20">
+			<mx:Text text="Sun Enviroment" />
+			<s:Spacer width="100%" />
+			<s:Button label="Back" click="button2_clickHandler(event)"/>
+<!--			<s:Button label="Next" click="button1_clickHandler(event)"/>-->
+			<s:Button label="Back" visible="false" />
+		</mx:HBox>
+		<s:VGroup width="100%" height="100%" gap="0" 
+				  paddingLeft="10" paddingBottom="10" paddingRight="10" paddingTop="10">
+			
+		<mx:HBox width="100%" height="100%" 
+				 paddingLeft="10"
+				 verticalAlign="middle" horizontalAlign="left" id="hb1" >
+			<s:Image width="100" height="100" source="@Embed('assets/sun3-up.png')"/>
+			<s:List width="100%" height="100%" labelField="commonname" 
+					itemRenderer="EnvSunItemrender"
+					dragEnabled="true"
+					dataProvider="{AcSunHight}">
+				<s:layout>
+					<s:TileLayout />
+				</s:layout>
+			</s:List>
+		</mx:HBox>
+		<mx:HBox width="100%" height="100%" 
+				 paddingLeft="10"
+				 verticalAlign="middle" horizontalAlign="left"  >
+			<s:Image width="100" height="100" source="assets/sun2-up.png"/>
+			<s:List width="100%" height="100%" labelField="commonname" 
+					itemRenderer="EnvSunItemrender"
+					dragEnabled="true"
+					dataProvider="{AcSunMid}">
+				<s:layout>
+					<s:TileLayout />
+				</s:layout>
+			</s:List>		
+		</mx:HBox>
+		<mx:HBox width="100%" height="100%" 
+				 paddingLeft="10"
+				 verticalAlign="middle" horizontalAlign="left"  >
+			<s:Image width="100" height="100" source="assets/sun1-up.png"/>
+			<s:List width="100%" height="100%" labelField="commonname" 
+					itemRenderer="EnvSunItemrender"
+					dragEnabled="true"
+					dataProvider="{AcsunLow}">
+				<s:layout>
+					<s:TileLayout />
+				</s:layout>
+			</s:List>
+		</mx:HBox>
+		</s:VGroup>
+	</s:VGroup> 
+	
+</mx:Canvas>

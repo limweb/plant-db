@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fxpProperties abbreviated="false" authoringTool="Flex Builder" compiles="true" parentProject="06f981bd-3945-43e7-bcec-f7cc9686a1e0" projectUUID="06f981bd-3945-43e7-bcec-f7cc9686a1e0" pureCatalystProject="false" sdkVersion="4.6.0" uuid="3f4b08a3-e748-43fc-906b-caa23801f5fb" version="15">
+  <projects>
+    <project filename="ColorList_3.fxpl" position="2" projectUUID="7242cd4b-24d6-4969-a8f9-fde6d4e936ca" uuid="3f4b08a3-e748-43fc-906b-caa23801f5fb"/>
+    <project filename="TreeType_4.fxpl" position="3" projectUUID="06bc35e6-75d1-4154-bf53-df61de932419" uuid="3f4b08a3-e748-43fc-906b-caa23801f5fb"/>
+  </projects>
+  <src/>
+  <swc>
+    <linked location="sdkPlaceHolder" path="sdkPlaceHolder" position="0" uuid="3f4b08a3-e748-43fc-906b-caa23801f5fb"/>
+    <linked location="C:/myflex/Plant/libs" path="/libs" position="1" uuid="b4017f3d-8b30-4e5b-b75b-41b1c96dcead"/>
+  </swc>
+  <misc/>
+  <theme/>
+  <mxmlFormattingPrefs groupAttributesByState="true" maxLineWidth="100" mxmlAlignAttributes="true" mxmlAttributeOrder="id,userLabel,includeIn,excludeFrom,visible,x,y,z,left,right,top,bottom,width,height,minWidth,minHeight,maxWidth,maxHeight,label" mxmlKeepAttributeValuesOrganized="true"/>
+</fxpProperties>
