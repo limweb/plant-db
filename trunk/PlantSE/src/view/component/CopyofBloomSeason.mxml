@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" 
+		   xmlns:components="components.*"
+		   >
+
+	
+	<fx:Script>
+		<![CDATA[
+			import components.MyGridRow;
+			import components.MyTitleGridRow;
+			
+			import mx.collections.ArrayCollection;
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			
+			import th.co.servit.vo.Bloomseason;
+			import th.co.servit.vo.PlantDBVO;
+			private	var mg:MyGridRow = new MyGridRow();
+
+			
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				FlexGlobals.topLevelApplication.gotoVs(5);
+			}
+			
+			public function init(list:ArrayCollection):void {
+				mygrid.removeAllChildren();	
+//				var headGridRow:MyTitleGridRow = new MyTitleGridRow();
+//				mygrid.addChild(headGridRow);
+				
+			  if(list !=null && list.length > 0){
+//				var bs:Bloomseason;
+				for(var i:int=0; i<list.length; i++ ){
+					mg = new MyGridRow();
+//					bs = list[i] as Bloomseason;
+					mygrid.addChild(mg);
+					mg.plvo = list[i] as PlantDBVO;
+				}
+			  }
+			}
+			
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				FlexGlobals.topLevelApplication.gotoVs(7);
+				
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+
+	</fx:Declarations>
+	<s:VGroup width="100%" height="100%" >
+		<mx:HBox width="100%" height="32" backgroundColor="#FFFFF0" horizontalAlign="right"
+				 paddingRight="20" verticalAlign="middle" paddingLeft="20">
+			<mx:Text text="BloomSeason" />
+			<s:Spacer width="100%" />
+			<s:Button label="Back" click="button2_clickHandler(event)"/>
+			<s:Button label="Next" click="button1_clickHandler(event)"/>
+			<s:Button label="Back" visible="false" />
+		</mx:HBox>
+		<mx:VBox width="100%" height="100%" verticalGap="0"  horizontalScrollPolicy="off">
+			<s:VGroup width="100%" gap="0"
+					 paddingLeft="10" paddingRight="10">
+				<mx:Grid id="myTitlegrid" width="{mygrid.width}" 
+						 backgroundColor="#DBD8D8">
+					<mx:GridRow height="52" width="100%" >
+						<!--title-->
+						<mx:GridItem width="200" horizontalAlign="center" verticalAlign="middle" >
+							<mx:Text text="ITEM" fontWeight="bold"  textAlign="center" />
+						</mx:GridItem>
+						<!--col01-->
+						<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="middle" id="gitm1"  >
+							<mx:Text text="JAN" fontWeight="bold"  textAlign="center" />
+						</mx:GridItem>
+						<!--col02-->
+						<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="middle"  id="gitm2"   >
+							<mx:Text text="FEB" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col03-->
+						<mx:GridItem width="100%"  horizontalAlign="center" verticalAlign="middle"  id="gitm3"  >
+							<mx:Text text="MAR" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col04-->
+						<mx:GridItem width="100%"  horizontalAlign="center" verticalAlign="middle"  id="gitm4"  >
+							<mx:Text text="APR" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col05-->
+						<mx:GridItem width="100%"  horizontalAlign="center" verticalAlign="middle"  id="gitm5"  >
+							<mx:Text text="MAY" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col06-->
+						<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="middle"  id="gitm6"  >
+							<mx:Text text="JUN" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col07-->
+						<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="middle"  id="gitm7"  >
+							<mx:Text text="JUL" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col08-->
+						<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="middle"  id="gitm8"  >
+							<mx:Text text="AUG" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col09-->
+						<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="middle"  id="gitm9"  >
+							<mx:Text text="SEP" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col10-->
+						<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="middle"  id="gitm10"  >
+							<mx:Text text="OCT" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col11-->
+						<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="middle"  id="gitm11"  >
+							<mx:Text text="NOV" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+						<!--col12-->
+						<mx:GridItem width="100%" horizontalAlign="center" verticalAlign="middle" id="gitem12" >
+							<mx:Text text="DEC" fontWeight="bold"  textAlign="center" />
+							
+						</mx:GridItem>
+					</mx:GridRow>
+				</mx:Grid>
+				
+			</s:VGroup>
+						
+		<s:Scroller width="100%" height="100%" >
+			
+			<s:VGroup width="100%" height="100%"  gap="0"
+					  paddingBottom="10" paddingLeft="10" paddingRight="10">
+				
+				<mx:Grid id="mygrid" width="100%" height="100%" 
+						 backgroundColor="#DBD8D8" >
+
+				</mx:Grid>
+			</s:VGroup>
+		</s:Scroller>
+		</mx:VBox>
+	</s:VGroup> 
+	
+</mx:Canvas>

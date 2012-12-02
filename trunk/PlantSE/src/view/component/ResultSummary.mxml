@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" 
+		   width="100%" height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.binding.utils.BindingUtils;
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.DragEvent;
+			import mx.managers.DragManager;
+			import mx.managers.PopUpManager;
+			import mx.utils.ObjectUtil;
+			
+			import th.co.servit.popup.PlantItemPopup;
+			import th.co.servit.vo.PlantDBVO;
+			import th.co.servit.vo.SearchResult;
+			
+			[Bindable]
+			private var AcShrub:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var AcVein:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var AcGroundC:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			private var AcTree:ArrayCollection = new ArrayCollection();
+			[Bindable] private var itempopup:PlantItemPopup = new PlantItemPopup();
+			public function addData(list:ArrayCollection):void {
+				for(var i:int =0; i< list.length; i++ ){
+					if(list[i].planttype == 'ไม้ต้น'){
+						AcTree.addItem(list[i]);
+					} else if(list[i].planttype == 'ไม่พุ่ม'){
+						AcShrub.addItem(list[i]);
+						
+					} else if(list[i].planttype == 'ไม้คลุมดิน'){
+						AcGroundC.addItem(list[i]);
+						
+					} else if(list[i].planttype == 'ไม้เลื่อย'){
+						AcVein.addItem(list[i]);
+					} else {
+						
+					}
+				}
+				AcTree.refresh();
+				AcShrub.refresh();
+				AcVein.refresh();
+				AcGroundC.refresh();
+				
+			}
+
+	
+	
+			protected function back2Add(event:MouseEvent):void
+			{
+				AcTree.removeAll();
+				AcVein.removeAll();
+				AcShrub.removeAll();
+				AcGroundC.removeAll();
+				FlexGlobals.topLevelApplication.gotoVs(1);
+			}
+			
+	
+			
+			protected function Next(event:MouseEvent):void
+			{
+				FlexGlobals.topLevelApplication.gotoVs(4);
+				
+			}
+			
+			protected function treelist_doubleClickHandler(event:MouseEvent):void
+			{
+				itempopup = PlantItemPopup(PopUpManager.createPopUp(this,PlantItemPopup,true));
+				itempopup.setData(event.currentTarget.selectedItem as PlantDBVO);
+				
+			}
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				FlexGlobals.topLevelApplication.gotoVs(5);
+				
+			}
+			
+			protected function WaterEnvClick(event:MouseEvent):void
+			{
+				FlexGlobals.topLevelApplication.gotoVs(8);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:VGroup width="100%" height="100%" >
+		<mx:HBox width="100%" height="32" backgroundColor="#FFFFF0" horizontalAlign="right"
+				 paddingRight="20" verticalAlign="middle" paddingLeft="20" >
+			<mx:Text text="Summary Result" />
+			<s:Spacer width="100%" />
+			<s:Button label="Back to Add" click="back2Add(event)"/>
+			<s:Button label="BloomSeason" click="Next(event)"/>
+			<s:Button label="SUN Enviroment" click="button1_clickHandler(event)"/>
+			<s:Button label="Water Enviroment" click="WaterEnvClick(event)"/>
+			<s:Button label="Back" visible="false" />
+		</mx:HBox>
+		<mx:HBox width="100%" height="100%">
+			<mx:VBox width="100%" height="100%" paddingLeft="20" paddingRight="20" paddingBottom="20">
+				<s:Group  x="0" y="0" width="100%" height="30" >
+					<mx:Text x="0" y="0" fontFamily="Verdana" fontSize="22"
+							 fontWeight="bold" text="MY LIST" 
+							 />
+				</s:Group>
+				<s:Scroller width="100%" height="100%" skinClass="components.Whatever">
+					<s:VGroup width="100%"  gap="0" 
+							  >
+						<s:Group width="100%" height="30" 
+								 visible="{AcTree.length>0}"
+								 includeInLayout="{AcTree.length>0}">
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="TREE" 
+									 includeInLayout="{AcTree.length>0}"
+									 visible="{AcTree.length>0}"/>
+						</s:Group>
+						<s:List width="100%" autoLayout="true"
+								id="treelist"
+								dataProvider="{AcTree}"
+								labelField="commonname" 
+								itemRenderer="itemrender.itemRenderer2"
+								doubleClickEnabled="true"
+								doubleClick="treelist_doubleClickHandler(event)"
+								>
+							<s:layout>
+								<s:VerticalLayout id="vlo" requestedRowCount="{AcTree.length}" />
+							</s:layout>
+						</s:List>
+						<s:Group width="100%" height="30" 
+								 visible="{AcShrub.length>0}"
+								 includeInLayout="{AcShrub.length>0}">
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="SHRUB" 
+									 includeInLayout="{AcShrub.length>0}"
+									 visible="{AcShrub.length>0}"/>
+						</s:Group>
+						<s:List width="100%"
+								dataProvider="{AcShrub}"
+								labelField="name" 
+								itemRenderer="itemrender.itemRenderer2"
+								doubleClickEnabled="true"
+								doubleClick="treelist_doubleClickHandler(event)"
+								>
+							<s:layout>
+								<s:VerticalLayout id="vloSHRUB" requestedRowCount="{AcShrub.length}" />
+							</s:layout>
+						</s:List>
+						<s:Group width="100%" height="30" 
+								 visible="{AcVein.length>0}"
+								 includeInLayout="{AcVein.length>0}">
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="VEIN" 
+									 includeInLayout="{AcVein.length>0}"
+									 visible="{AcVein.length>0}"/>
+						</s:Group>
+						<s:List width="100%"
+								dataProvider="{AcVein}"
+								labelField="name" 
+								itemRenderer="itemrender.itemRenderer2"
+								doubleClickEnabled="true"
+								doubleClick="treelist_doubleClickHandler(event)"
+								>
+							<s:layout>
+								<s:VerticalLayout id="vloVein" requestedRowCount="{AcVein.length}" />
+							</s:layout>
+						</s:List>
+						<s:Group width="100%" height="30" 
+								 visible="{AcGroundC.length>0}"
+								 includeInLayout="{AcGroundC.length>0}">
+							<mx:Text x="41" y="0" fontFamily="Verdana" fontSize="22"
+									 fontWeight="bold" text="Ground Cover" 
+									 includeInLayout="{AcGroundC.length>0}"
+									 visible="{AcGroundC.length>0}"/>
+						</s:Group>
+						<s:List width="100%"
+								dataProvider="{AcGroundC}"
+								labelField="name" 
+								itemRenderer="itemrender.itemRenderer2"
+								doubleClickEnabled="true"
+								doubleClick="treelist_doubleClickHandler(event)"
+								>
+							<s:layout>
+								<s:VerticalLayout id="vloGround" requestedRowCount="{AcGroundC.length}" />
+							</s:layout>
+						</s:List>
+						
+					</s:VGroup>
+				</s:Scroller>
+			</mx:VBox>
+		</mx:HBox>
+		
+	</s:VGroup> 
+</mx:Canvas>

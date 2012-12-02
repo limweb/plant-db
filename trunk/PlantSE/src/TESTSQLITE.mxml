@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:sqlite="com.peterelst.air.sqlite.*"
+					   x="0" y="0" width="783" height="500">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.rpc.events.ResultEvent;
+			import mx.utils.ObjectUtil;
+			
+			import th.co.servit.dao.CUSTOMER_DAO;
+			import th.co.servit.vo.CUSTOMERVO;
+			
+			[Bindable]
+			public var Ac:ArrayCollection = new ArrayCollection();
+			[Bindable]
+			public var Ac2:ArrayCollection = new ArrayCollection();
+			private	var vo:CUSTOMERVO = new CUSTOMERVO();
+			private	var dao:CUSTOMER_DAO = CUSTOMER_DAO.getInstance();
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				myQuery.execute();
+				
+			}
+			
+			protected function myQuery_resultHandler(event:SQLEvent):void
+			{
+				dg1.dataProvider = new ArrayCollection(myQuery.data);
+			}
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+	 				dao.setConnection(myDb.connection);
+					dao.getTableContent(processResults, errorConnectingToTable);
+			}
+			
+			private function resultdao(event:ResultEvent):void {
+				Alert.show(ObjectUtil.toString(event.result),'obj result');
+			}
+			
+			
+			private function processResults(resultsArray:ArrayCollection=null):void {
+				Ac2 = resultsArray;
+			}
+			
+			private function errorConnectingToTable(evt:SQLErrorEvent):void {
+				trace("Error getting information from DB");
+			}
+			
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<sqlite:SQLite id="myDb" file="assets/TEST_DB.db"  />
+		<sqlite:Query  id="myQuery" connection="{myDb.connection}" sql="SELECT
+					   CUSTOMER.ID,
+					   CUSTOMER.DESCRIPTION
+					   FROM
+					   CUSTOMER"
+					   result="myQuery_resultHandler(event)"/> 
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Button x="32" y="60" label="test" click="button1_clickHandler(event)"/>
+	<mx:DataGrid id="dg1" y="111" left="10" width="186" height="300" variableRowHeight="true">
+		<mx:columns>
+			<mx:DataGridColumn dataField="ID"/>
+			<mx:DataGridColumn dataField="DESCRIPTION"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<mx:DataGrid id="dg2" y="111" left="200" width="181" height="300" dataProvider="{Ac2}"
+				 variableRowHeight="true">
+		<mx:columns>
+			<mx:DataGridColumn dataField="ID"/>
+			<mx:DataGridColumn dataField="DESCRIPTION"/>
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<s:Button x="255" y="60" label="test1" click="button2_clickHandler(event)"/>
+</s:WindowedApplication>

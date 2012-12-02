@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:s="library://ns.adobe.com/flex/spark"
+				xmlns:fx="http://ns.adobe.com/mxml/2009"
+				xmlns:d="http://ns.adobe.com/fxg/2008/dt"
+				width="56" height="56" autoDrawBackground="false">
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="hovered"/>
+		<s:State name="selected"/>
+	</s:states>
+	<s:Group x="0" y="0">
+		<s:Group x="0" y="0">
+			<s:Rect x="0.5" y="0.5" width="55" height="55">
+				<s:stroke>
+					<s:SolidColorStroke caps="none" color="#5C5C5C" joints="miter" miterLimit="4"
+										weight="1"/>
+				</s:stroke>
+				<s:fill>
+					<s:SolidColor color="#FFFFF0"/>
+				</s:fill>
+			</s:Rect>
+			<s:BitmapImage x="4" y="5" width="47" height="47" smooth="true"
+						   source="{data.image1}"/>
+		</s:Group>
+	</s:Group>
+	<s:Rect d:userLabel="Item Highlight Rectangle" width="56" height="56"
+			alpha.hovered="0.3"
+			alpha.normal="0"
+			alpha.selected="0.5">
+		<s:fill>
+			<s:SolidColor color="0xFF0000"/>
+		</s:fill>
+	</s:Rect>
+</s:ItemRenderer>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" 
+		   xmlns:components="components.*"
+		   >
+
+	
+	<fx:Script>
+		<![CDATA[
+			import components.BloomSeasonItem;
+			import components.MyGridRow;
+			import components.MyTitleGridRow;
+			
+			import mx.collections.ArrayCollection;
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			
+			import th.co.servit.util.MonthArrayUtil;
+			import th.co.servit.vo.Bloomseason;
+			import th.co.servit.vo.PlantDBVO;
+			[Bindable] private	var bitem:BloomSeasonItem;
+			private var mu:MonthArrayUtil = new MonthArrayUtil();
+			
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				FlexGlobals.topLevelApplication.gotoVs(5);
+			}
+			
+			public function init(list:ArrayCollection):void {
+				vgId.removeAllElements();
+				for(var i:int=0; i<list.length; i++ ){
+					bitem = new BloomSeasonItem();
+					var plvo:PlantDBVO = list[i] as PlantDBVO; 
+					vgId.addElement(bitem);
+					bitem.plvo = plvo;
+					bitem.init(mu.m2array(plvo.bloomingseason),mu.color2array(plvo.flowercolor));
+				}
+				validateNow();
+			}
+			
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				FlexGlobals.topLevelApplication.gotoVs(7);
+				
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+
+	</fx:Declarations>
+	<s:VGroup width="100%" height="100%" >
+		<mx:HBox width="100%" height="32" backgroundColor="#FFFFF0" horizontalAlign="right"
+				 paddingRight="20" verticalAlign="middle" paddingLeft="20">
+			<mx:Text text="BloomSeason" />
+			<s:Spacer width="100%" />
+			<s:Button label="Back" click="button2_clickHandler(event)"/>
+			<s:Button label="Next" click="button1_clickHandler(event)"/>
+			<s:Button label="Back" visible="false" />
+		</mx:HBox>
+		<mx:VBox width="100%" height="100%" verticalGap="0"  
+				 backgroundColor="#cccccc"
+				 horizontalScrollPolicy="off">
+			<s:Scroller width="100%" height="50" horizontalScrollPolicy="off"  verticalScrollPolicy="on" enabled="false" >
+			<s:HGroup width="100%" gap="0" height="50"
+					 paddingLeft="10" paddingRight="10">
+
+						<!--title-->
+						<s:Group width="200" height="100%">
+							<s:Rect width="100%" height="100%">
+								<s:stroke>
+									<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+								</s:stroke>
+								<s:fill>
+									<s:SolidColor color="#00ff00" />
+								</s:fill>
+							</s:Rect>
+							<s:VGroup width="100%" height="100%" verticalAlign="middle">
+							<mx:Text width="100%" text="ITEM" fontWeight="bold"  textAlign="center" />
+							</s:VGroup>
+						</s:Group>
+						<!--col01-->
+						<s:Group width="100%" height="100%">
+							<s:Rect width="100%" height="100%">
+								<s:stroke>
+									<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+								</s:stroke>
+								<s:fill>
+									<s:SolidColor color="#9D8CFD" />
+								</s:fill>
+							</s:Rect>
+							<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+							<mx:Text text="JAN" fontWeight="bold"  textAlign="center" />
+							</s:VGroup>
+						</s:Group>
+						<!--col02-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+							<mx:Text text="FEB" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col03-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="MAR" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col04-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="APR" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col05-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="MAY" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col06-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="JUN" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col07-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="JUL" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col08-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="AUG" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col09-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="SEP" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col10-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="OCT" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col11-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="NOV" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+						<!--col12-->
+				<s:Group width="100%" height="100%">
+					<s:Rect width="100%" height="100%">
+						<s:stroke>
+							<s:SolidColorStroke color="#000000" weight="1" alpha="1" />
+						</s:stroke>
+						<s:fill>
+							<s:SolidColor color="#9D8CFD" />
+						</s:fill>
+					</s:Rect>
+					<s:VGroup width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+							<mx:Text text="DEC" fontWeight="bold"  textAlign="center" />
+					</s:VGroup>
+				</s:Group>
+			</s:HGroup>
+		</s:Scroller>						
+		<s:Scroller width="100%" height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="on" >
+			<s:VGroup width="100%" height="100%"  gap="0" id="vgId"
+					  paddingBottom="10" paddingLeft="10" paddingRight="10">
+		
+
+			</s:VGroup>
+		</s:Scroller>
+		</mx:VBox>
+	</s:VGroup> 
+	
+</mx:Canvas>

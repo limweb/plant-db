@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:GridRow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			xmlns:s="library://ns.adobe.com/flex/spark" 
+			xmlns:mx="library://ns.adobe.com/flex/mx" 
+			width="100%" height="200"
+			creationComplete="init()"
+			>
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			
+			import th.co.servit.vo.Bloomseason;
+			import th.co.servit.vo.PlantDBVO;
+			[Bindable] private var c:uint = Math.random() * 16777215;
+			[Bindable] public var plvo:PlantDBVO = new PlantDBVO();
+			 private var ArBloom:Array = new Array();
+			public function init():void {
+					var cc:uint = 0;
+					for(var j:int=0;j<AcColor.length;j++){
+						if( plvo.flowercolor.indexOf(AcColor[j].name) != -1 ){
+							cc =  uint(AcColor[j].color);
+							break;			
+						} 
+					}
+				
+					if(plvo.pic1.length > 4 ){
+						img1.source = plvo.pic1;
+					} else {
+						img1.source = '.\\assets\\big-up.png';						
+					}
+//					
+//					txtName.text = plvo.commonname;
+//					ArBloom = plvo.bloomingseason.split(',');
+//					
+//					for(var i:int=0;i< ArBloom.length;i++){
+//						if(ArBloom[i] == "มกราคม"){
+//							m01.setStyle('backgroundColor',cc);
+//						}
+//						
+//						
+//						if( ArBloom[i] == "กุมภาพันธ์"){
+//							m02.setStyle('backgroundColor',cc);
+//						}
+//						
+//						
+//						if( ArBloom[i] == "มีนาคม"){
+//							m03.setStyle('backgroundColor',cc);
+//						} 
+//						
+//						
+//						if( ArBloom[i] == "เมษายน"){
+//						
+//							m04.setStyle('backgroundColor',cc);
+//						}
+//						
+//
+//						if( ArBloom[i] == "พฤษภาคม"){
+//							m05.setStyle('backgroundColor',cc);
+//						} 
+//						
+//
+//						
+//						if( ArBloom[i] == "มิถุนายน"){
+//							m06.setStyle('backgroundColor',cc);
+//						}
+//						
+//						
+//						if( ArBloom[i] == "กรกฎาคม"){
+//							m07.setStyle('backgroundColor',cc);
+//						} 
+//						
+//						
+//						
+//						if( ArBloom[i] == "สิงหาคม"){
+//							m08.setStyle('backgroundColor',cc);
+//						}
+//						
+//						
+//						
+//						
+//						if( ArBloom[i] == "กันยายน"){
+//							m09.setStyle('backgroundColor',cc);
+//						}
+//						
+//						
+//						if( ArBloom[i] == "ตุลาคม"){
+//							m10.setStyle('backgroundColor',cc);
+//						} 
+//						
+//							
+//							
+//						if( ArBloom[i] == "พฤศจิกายน"){
+//							m11.setStyle('backgroundColor',cc);
+//						}
+//						
+//						
+//						if( ArBloom[i] == "ธันวาคม"){
+//							m12.setStyle('backgroundColor',cc);
+//						} 
+//						
+//					}
+				
+			}
+			
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:ArrayCollection id="AcColor">
+			<fx:Object color="0xffffff" name='ขาว'/> 
+			<fx:Object color="0xF9E497" name='ครีม'/>
+			<fx:Object color="0xffff00" name='เหลือง'/> 
+			<fx:Object color="0xff6418" name='ส้ม'/> 
+			<fx:Object color="0xff0000" name='แดง'/> 
+			<fx:Object color="0xf946a7" name='ชมพู'/>
+			<fx:Object color="0x66ff00" name='เขียวอ่อน'/> 
+			<fx:Object color="0x004400" name='เขียวเข้ม'/> 
+			<fx:Object color="0x660066" name='ม่วง'/>
+			<fx:Object color="0x7bdbff" name='ฟ้า'/> 
+			<fx:Object color="0x003399" name='น้ำเงิน'/> 
+			<fx:Object color="0x331100" name='น้ำตาล'/>
+			<fx:Object color="0x000000" name='ดำ'/>
+		</s:ArrayCollection>
+	</fx:Declarations>
+		<!--title-->
+		<mx:GridItem width="200" horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+			<s:VGroup width="200" height="100%" horizontalAlign="center" 
+					  gap="5" verticalAlign="middle"
+					  paddingBottom="5" paddingTop="10" paddingLeft="10" paddingRight="10"
+					  >
+				<s:Image width="100%" height="100%" id="img1" scaleMode="letterbox" />
+				<mx:Text id="txtName" fontWeight="bold"  textAlign="center" text="{plvo.commonname}"/>
+			</s:VGroup>
+		</mx:GridItem>
+		<!--col01-->
+		<mx:GridItem width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm1.width}"   id="m01" >
+
+		</mx:GridItem>
+		<!--col02-->
+		<mx:GridItem  id="m02" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm2.width}" >
+			
+		</mx:GridItem>
+		<!--col03-->
+		<mx:GridItem  id="m03" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm3.width}" >
+			
+		</mx:GridItem>
+		<!--col04-->
+		<mx:GridItem  id="m04" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm4.width}" >
+			
+		</mx:GridItem>
+		<!--col05-->
+		<mx:GridItem  id="m05" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm5.width}" >
+			
+		</mx:GridItem>
+		<!--col06-->
+		<mx:GridItem id="m06" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm6.width}" >
+			
+		</mx:GridItem>
+		<!--col07-->
+		<mx:GridItem  id="m07" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm7.width}" >
+			
+		</mx:GridItem>
+		<!--col08-->
+		<mx:GridItem  id="m08" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm8.width}" >
+			
+		</mx:GridItem>
+		<!--col09-->
+		<mx:GridItem id="m09" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm9.width}" >
+			
+		</mx:GridItem>
+		<!--col10-->
+		<mx:GridItem id="m10" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm10.width}" >
+			
+		</mx:GridItem>
+		<!--col11-->
+		<mx:GridItem id="m11" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm11.width}" >
+			
+		</mx:GridItem>
+		<!--col12-->
+		<mx:GridItem id="m12" width="{FlexGlobals.topLevelApplication.vBloomSeasonID.gitm12.width}" >
+			
+		</mx:GridItem>
+</mx:GridRow>

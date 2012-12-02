@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" 
+					   xmlns:component="view.component.*" 
+					   xmlns:sqlite="com.peterelst.air.sqlite.*"
+					   creationComplete="windowedapplication1_creationCompleteHandler(event)"
+					   >
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		@namespace component "view.component.*";
+		
+		
+		
+		
+			mx|Grid  {
+				horizontal-gap:-1;
+				vertical-gap:-1;
+			}
+			mx|GridItem
+			{
+				border-color:#000000;
+				border-style:solid;
+				border-thickness:1;
+			}
+	</fx:Style>
+	<fx:Declarations>
+		<s:ArrayCollection id="AcColor">
+			<fx:Object color="0xffffff" name='ขาว'/> 
+			<fx:Object color="0xF9E497" name='ครีม'/>
+			<fx:Object color="0xffff00" name='เหลือง'/> 
+			<fx:Object color="0xff6418" name='ส้ม'/> 
+			<fx:Object color="0xff0000" name='แดง'/> 
+			<fx:Object color="0xf946a7" name='ชมพู'/>
+			<fx:Object color="0x66ff00" name='เขียวอ่อน'/> 
+			<fx:Object color="0x004400" name='เขียวเข้ม'/> 
+			<fx:Object color="0x660066" name='ม่วง'/>
+			<fx:Object color="0x7bdbff" name='ฟ้า'/> 
+			<fx:Object color="0x003399" name='น้ำเงิน'/> 
+			<fx:Object color="0x331100" name='น้ำตาล'/>
+			<fx:Object color="0x000000" name='ดำ'/>
+		</s:ArrayCollection>
+		<sqlite:SQLite id="myDb" file="assets/testdb.db"  />
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			import th.co.servit.dao.PlantDAO;
+			import th.co.servit.vo.Bloomseason;
+			import th.co.servit.vo.PlantDBVO;
+		
+			
+			[Bindable] [Embed(source="../assets/icons/icon_title_success.png")]
+			public var ICON_SUCCESS:Class;
+			
+			[Bindable] [Embed(source="../assets/icons/icon_title_confirm.png")]
+			public var ICON_CONFIRM:Class; 
+			
+			[Bindable] [Embed(source="../assets/icons/icon_title_error.png")]
+			public var ICON_ERROR:Class; 
+			
+			[Bindable] [Embed(source="../assets/icons/icon_title_warning.png")]
+			public var ICON_WARNING:Class;
+
+			
+		[Bindable] public var searchAc:ArrayCollection= new ArrayCollection();
+		[Bindable]
+		private var AcShrub:ArrayCollection = new ArrayCollection();
+		[Bindable]
+		private var AcVein:ArrayCollection = new ArrayCollection();
+		[Bindable]
+		private var AcGroundC:ArrayCollection = new ArrayCollection();
+		[Bindable]
+		private var AcTree:ArrayCollection = new ArrayCollection();
+		
+		private	var vo:PlantDBVO = new PlantDBVO();
+		public	var dao:PlantDAO = PlantDAO.getInstance();
+		[Bindable] public var Acsumury:ArrayCollection = new ArrayCollection();	
+		[Bindable] public var searchtext:String = '';	
+			
+		public function minimizeWindow():void
+		{
+		this.stage.nativeWindow.minimize();
+		}
+		
+		public function maximizeWindow():void
+		{
+		this.stage.nativeWindow.maximize();
+		}          
+		
+		public function restoreWindow():void
+		{
+		this.stage.nativeWindow.restore();
+		}          
+		
+		public function closeWindow():void
+		{
+		this.stage.nativeWindow.close();
+		}
+		
+		public function gotoVs(vs:int):void {
+		if(vs == 1 ){
+			vsMain.selectedChild = MainSearchID;
+		} else if(vs == 2 ){
+			vsMain.selectedChild = MainResultID;
+		vResultPlantID.addData(searchAc);
+		} else if(vs == 3 ){
+			dao.setConnection(myDb.connection);
+			dao.getTableContentbyArrayCommonName(searchtext,processResults, errorConnectingToTable);
+			vsMain.selectedChild = MainResultSummaryId;
+		} else if(vs == 4 ){
+			vBloomSeasonID.init(Acsumury);
+			vsMain.selectedChild = MainSeasonID;
+		} else if(vs == 5 ){
+			vsMain.selectedChild = MainSUNEnvID;
+			vSunEnviromentID.setData(Acsumury);
+		} else if(vs == 6 ){
+			vsMain.selectedChild = MainAddID;
+			dao.setConnection(myDb.connection);
+			dao.getTableContent(getAllresult);
+		} else if(vs == 7 ){
+			vsMain.selectedChild = MainResultSummaryId;
+		} else if(vs == 8 ){
+			vsMain.selectedChild = MainWaterEnvID;
+			vWaterEnviromentID.setData(Acsumury);
+		} else {
+		
+		}
+		}
+
+		private	function getAllresult(resultsArray:ArrayCollection=null):void { 
+			vAddPlant.PlantList = resultsArray; 
+		}
+			
+		private function processResults(resultsArray:ArrayCollection=null):void {
+			Acsumury = resultsArray;
+			vResultSummaryId.addData(Acsumury);
+		}
+		
+		private function errorConnectingToTable(evt:SQLErrorEvent):void {
+			trace("Error getting information from DB");
+		}
+			
+			
+			protected function windowedapplication1_creationCompleteHandler(event:FlexEvent):void
+			{
+				nativeWindow.x = (Capabilities.screenResolutionX - nativeWindow.width) / 2;
+				nativeWindow.y = (Capabilities.screenResolutionY - nativeWindow.height) / 2;
+				nativeWindow.maximize();
+			}
+			
+		]]>
+	</fx:Script>
+	<mx:ViewStack  width="100%" height="100%" id="vsMain" 
+				   creationPolicy="all">
+		<mx:Canvas  id="MainSearchID">
+			<component:Search id="vSearchID" />
+		</mx:Canvas>
+		<mx:Canvas  id="MainResultID" width="100%" height="100%">
+			<component:ResultPlant id="vResultPlantID" />			
+		</mx:Canvas>
+		<mx:Canvas id="MainResultSummaryId" width="100%" height="100%">
+			<component:ResultSummary id="vResultSummaryId" />
+		</mx:Canvas>
+		<mx:Canvas  id="MainSeasonID" width="100%" height="100%">
+			<component:BloomSeason id="vBloomSeasonID" />		
+		</mx:Canvas>
+		<mx:Canvas  id="MainSUNEnvID" width="100%" height="100%">
+			<component:SUNEnviroment id="vSunEnviromentID" />		
+		</mx:Canvas>
+		<mx:Canvas  id="MainWaterEnvID" width="100%" height="100%">
+			<component:WaterEnviroment id="vWaterEnviromentID" />		
+		</mx:Canvas>
+		<mx:Canvas  id="MainAddID" width="100%" height="100%">
+			<component:AddPlant  id="vAddPlant" />		
+		</mx:Canvas>
+		
+	</mx:ViewStack>
+</s:WindowedApplication>
